@@ -35,7 +35,7 @@ app.use('/api/partners', partnerRoutes);
 
 // Root route
 app.get('/', (req, res) => {
-  res.json({ message: 'Nitru Connect API running successfully.' });
+  res.send('Nitru Connect API running successfully.');
 });
 
 // Error handlers
