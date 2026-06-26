@@ -78,8 +78,21 @@ const deletePartner = async (req, res) => {
   }
 };
 
+// @desc    Get all partners (Admin)
+// @route   GET /api/partners/admin/partners
+// @access  Private
+const getPartnersAdmin = async (req, res) => {
+  try {
+    const partners = await Partner.find({});
+    res.json(partners);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getPartners,
+  getPartnersAdmin,
   createPartner,
   updatePartner,
   deletePartner,

@@ -125,8 +125,21 @@ const deleteService = async (req, res) => {
   }
 };
 
+// @desc    Get all services (Admin)
+// @route   GET /api/services/admin/services
+// @access  Private
+const getServicesAdmin = async (req, res) => {
+  try {
+    const services = await Service.find({});
+    res.json(services);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getServices,
+  getServicesAdmin,
   getServiceBySlug,
   createService,
   updateService,

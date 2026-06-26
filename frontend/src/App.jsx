@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import AppRoutes from './routes/AppRoutes';
@@ -12,10 +11,6 @@ import { Agentation } from 'agentation';
 function App() {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [defaultService, setDefaultService] = useState('');
-  const location = useLocation();
-
-  // Determine if current path belongs to the administrative panel
-  const isAdminRoute = location.pathname.startsWith('/admin');
 
   const handleOpenQuote = (serviceName = '') => {
     setDefaultService(serviceName);
@@ -32,22 +27,22 @@ function App() {
       {/* Scroll listener to scroll viewport to top on path changes */}
       <ScrollToTop />
 
-      {/* Conditionally render public navbar */}
-      {!isAdminRoute && <Navbar onOpenQuote={() => handleOpenQuote()} />}
+      {/* Render public navbar */}
+      <Navbar onOpenQuote={() => handleOpenQuote()} />
       
       {/* Route Content */}
       <main className="flex-grow">
         <AppRoutes onOpenQuote={handleOpenQuote} />
       </main>
 
-      {/* Conditionally render public footer */}
-      {!isAdminRoute && <Footer />}
+      {/* Render public footer */}
+      <Footer />
 
       {/* Floating scroll to top button */}
-      {!isAdminRoute && <BackToTopButton />}
+      <BackToTopButton />
 
       {/* Floating WhatsApp chat button */}
-      {!isAdminRoute && <FloatingWhatsApp />}
+      <FloatingWhatsApp />
 
       {/* Shared consultation quotation request form */}
       <QuoteForm 

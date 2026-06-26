@@ -39,7 +39,7 @@ const ServicesManage = () => {
     try {
       setLoading(true);
       setErrorMsg('');
-      const data = await api.getServices();
+      const data = await api.getServicesAdmin();
       setServices(data);
     } catch (err) {
       console.error(err);

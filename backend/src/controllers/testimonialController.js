@@ -80,8 +80,21 @@ const deleteTestimonial = async (req, res) => {
   }
 };
 
+// @desc    Get all testimonials (Admin)
+// @route   GET /api/testimonials/admin/testimonials
+// @access  Private
+const getTestimonialsAdmin = async (req, res) => {
+  try {
+    const testimonials = await Testimonial.find({});
+    res.json(testimonials);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getTestimonials,
+  getTestimonialsAdmin,
   createTestimonial,
   updateTestimonial,
   deleteTestimonial,

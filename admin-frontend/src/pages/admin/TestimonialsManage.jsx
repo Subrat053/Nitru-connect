@@ -12,9 +12,9 @@ const TestimonialsManage = () => {
 
   // Form State
   const [formData, setFormData] = useState({
-    name: '',
-    company: '',
-    quote: '',
+    clientName: '',
+    companyName: '',
+    review: '',
     rating: 5,
     isActive: true,
   });
@@ -23,7 +23,7 @@ const TestimonialsManage = () => {
     try {
       setLoading(true);
       setErrorMsg('');
-      const data = await api.getTestimonials();
+      const data = await api.getTestimonialsAdmin();
       setTestimonials(data);
     } catch (err) {
       console.error(err);
@@ -40,9 +40,9 @@ const TestimonialsManage = () => {
   const handleEditClick = (item) => {
     setEditingId(item._id);
     setFormData({
-      name: item.name,
-      company: item.company || '',
-      quote: item.quote,
+      clientName: item.clientName,
+      companyName: item.companyName || '',
+      review: item.review,
       rating: item.rating || 5,
       isActive: item.isActive !== undefined ? item.isActive : true,
     });
@@ -52,9 +52,9 @@ const TestimonialsManage = () => {
   const handleAddNewClick = () => {
     setEditingId(null);
     setFormData({
-      name: '',
-      company: '',
-      quote: '',
+      clientName: '',
+      companyName: '',
+      review: '',
       rating: 5,
       isActive: true,
     });
@@ -167,8 +167,8 @@ const TestimonialsManage = () => {
                 {testimonials.length > 0 ? (
                   testimonials.map((item) => (
                     <tr key={item._id} className="hover:bg-white/30 transition-colors">
-                      <td className="py-4 pl-2 font-bold text-neutral whitespace-nowrap">{item.name}</td>
-                      <td className="py-4 font-semibold text-gray-500">{item.company || 'SME Business'}</td>
+                      <td className="py-4 pl-2 font-bold text-neutral whitespace-nowrap">{item.clientName}</td>
+                      <td className="py-4 font-semibold text-gray-500">{item.companyName || 'SME Business'}</td>
                       <td className="py-4">
                         <div className="flex items-center gap-0.5 text-secondary-dark">
                           {[...Array(item.rating || 5)].map((_, i) => (
@@ -177,7 +177,7 @@ const TestimonialsManage = () => {
                         </div>
                       </td>
                       <td className="py-4 text-gray-400 font-semibold max-w-xs truncate leading-relaxed">
-                        "{item.quote}"
+                        "{item.review}"
                       </td>
                       <td className="py-4">
                         <button
@@ -201,7 +201,7 @@ const TestimonialsManage = () => {
                             <Edit size={14} />
                           </button>
                           <button
-                            onClick={() => handleDelete(item._id, item.name)}
+                            onClick={() => handleDelete(item._id, item.clientName)}
                             className="p-1.5 border border-white text-red-500 bg-white/60 rounded-lg hover:bg-white/80 shadow-sm transition-all"
                             title="Delete Review"
                           >
@@ -246,8 +246,8 @@ const TestimonialsManage = () => {
                 <input
                   type="text"
                   required
-                  value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                  value={formData.clientName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, clientName: e.target.value }))}
                   placeholder="e.g. Sarah Jenkins"
                   className="border border-white/80 rounded-xl p-3 text-xs bg-white/60 focus:outline-none focus:border-primary font-semibold"
                 />
@@ -258,8 +258,8 @@ const TestimonialsManage = () => {
                 <label className="text-xs font-bold text-neutral">Company Name / Trade</label>
                 <input
                   type="text"
-                  value={formData.company}
-                  onChange={(e) => setFormData(prev => ({ ...prev, company: e.target.value }))}
+                  value={formData.companyName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, companyName: e.target.value }))}
                   placeholder="e.g. Bloom & Co Cafe"
                   className="border border-white/80 rounded-xl p-3 text-xs bg-white/60 focus:outline-none focus:border-primary font-semibold"
                 />
@@ -303,8 +303,8 @@ const TestimonialsManage = () => {
                 <textarea
                   rows="3"
                   required
-                  value={formData.quote}
-                  onChange={(e) => setFormData(prev => ({ ...prev, quote: e.target.value }))}
+                  value={formData.review}
+                  onChange={(e) => setFormData(prev => ({ ...prev, review: e.target.value }))}
                   placeholder="Paste quote text from client here..."
                   className="border border-white/80 rounded-xl p-3 text-xs bg-white/60 focus:outline-none focus:border-primary font-semibold resize-none"
                 />

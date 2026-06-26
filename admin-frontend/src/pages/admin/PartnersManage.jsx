@@ -14,8 +14,8 @@ const PartnersManage = () => {
   const [formData, setFormData] = useState({
     name: '',
     category: 'Payments',
-    logoUrl: '',
-    websiteUrl: '',
+    logo: '',
+    website: '',
   });
 
   const [uploadingLogo, setUploadingLogo] = useState(false);
@@ -24,7 +24,7 @@ const PartnersManage = () => {
     try {
       setLoading(true);
       setErrorMsg('');
-      const data = await api.getPartners();
+      const data = await api.getPartnersAdmin();
       setPartners(data);
     } catch (err) {
       console.error(err);
@@ -43,8 +43,8 @@ const PartnersManage = () => {
     setFormData({
       name: item.name,
       category: item.category || 'Payments',
-      logoUrl: item.logoUrl || '',
-      websiteUrl: item.websiteUrl || '',
+      logo: item.logo || '',
+      website: item.website || '',
     });
     setIsEditing(true);
   };
@@ -54,8 +54,8 @@ const PartnersManage = () => {
     setFormData({
       name: '',
       category: 'Payments',
-      logoUrl: '',
-      websiteUrl: '',
+      logo: '',
+      website: '',
     });
     setIsEditing(true);
   };
@@ -66,7 +66,7 @@ const PartnersManage = () => {
     setUploadingLogo(true);
     try {
       const result = await api.uploadFile(file, 'nitru_partners');
-      setFormData(prev => ({ ...prev, logoUrl: result.url }));
+      setFormData(prev => ({ ...prev, logo: result.url }));
     } catch (err) {
       alert('Upload failed: ' + err.message);
     } finally {
@@ -137,8 +137,8 @@ const PartnersManage = () => {
               >
                 {/* Logo Image Preview */}
                 <div className="w-20 h-20 bg-white/80 rounded-2xl flex items-center justify-center border border-white/80 p-2 shadow-inner shrink-0 overflow-hidden relative">
-                  {partner.logoUrl ? (
-                    <img src={partner.logoUrl} alt={partner.name} className="max-w-full max-h-full object-contain" />
+                  {partner.logo ? (
+                    <img src={partner.logo} alt={partner.name} className="max-w-full max-h-full object-contain" />
                   ) : (
                     <span className="text-neutral font-bold text-xs">{partner.name.substring(0, 3).toUpperCase()}</span>
                   )}
@@ -153,9 +153,9 @@ const PartnersManage = () => {
 
                 {/* Bottom details & actions */}
                 <div className="flex items-center gap-2 mt-1">
-                  {partner.websiteUrl && (
+                  {partner.website && (
                     <a
-                      href={partner.websiteUrl}
+                      href={partner.website}
                       target="_blank"
                       rel="noreferrer"
                       className="p-1.5 border border-white text-gray-500 bg-white/60 rounded-lg hover:bg-white/80 shadow-sm transition-all"
@@ -239,8 +239,8 @@ const PartnersManage = () => {
                 <label className="text-xs font-bold text-neutral">Website URL</label>
                 <input
                   type="url"
-                  value={formData.websiteUrl}
-                  onChange={(e) => setFormData(prev => ({ ...prev, websiteUrl: e.target.value }))}
+                  value={formData.website}
+                  onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))}
                   placeholder="https://partner-website.com"
                   className="border border-white/80 rounded-xl p-3 text-xs bg-white/60 focus:outline-none focus:border-primary font-semibold"
                 />
@@ -252,8 +252,8 @@ const PartnersManage = () => {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="text"
-                    value={formData.logoUrl}
-                    onChange={(e) => setFormData(prev => ({ ...prev, logoUrl: e.target.value }))}
+                    value={formData.logo}
+                    onChange={(e) => setFormData(prev => ({ ...prev, logo: e.target.value }))}
                     placeholder="https://example.com/logo.png"
                     className="flex-1 border border-white/80 rounded-xl p-3 text-xs bg-white/60 focus:outline-none focus:border-primary font-semibold"
                   />
@@ -274,9 +274,9 @@ const PartnersManage = () => {
                     </button>
                   </div>
                 </div>
-                {formData.logoUrl && (
+                {formData.logo && (
                   <div className="mt-2 w-24 h-16 bg-white/80 rounded-xl flex items-center justify-center p-2 border border-white/60 shadow-sm overflow-hidden">
-                    <img src={formData.logoUrl} alt="Logo Preview" className="max-w-full max-h-full object-contain" />
+                    <img src={formData.logo} alt="Logo Preview" className="max-w-full max-h-full object-contain" />
                   </div>
                 )}
               </div>

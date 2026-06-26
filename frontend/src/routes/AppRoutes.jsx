@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
 
 // Loading Spinner Component
 const LoadingPage = () => (
@@ -25,17 +24,6 @@ const Terms = lazy(() => import('../pages/public/Terms'));
 const CookiePolicy = lazy(() => import('../pages/public/CookiePolicy'));
 const Disclaimer = lazy(() => import('../pages/public/Disclaimer'));
 
-// Admin Pages (Lazy Loaded)
-const Login = lazy(() => import('../pages/admin/Login'));
-const Dashboard = lazy(() => import('../pages/admin/Dashboard'));
-const Enquiries = lazy(() => import('../pages/admin/Enquiries'));
-const EnquiryDetails = lazy(() => import('../pages/admin/EnquiryDetails'));
-const ServicesManage = lazy(() => import('../pages/admin/ServicesManage'));
-const SiteSettings = lazy(() => import('../pages/admin/SiteSettings'));
-const TestimonialsManage = lazy(() => import('../pages/admin/TestimonialsManage'));
-const PartnersManage = lazy(() => import('../pages/admin/PartnersManage'));
-const BlogsManage = lazy(() => import('../pages/admin/BlogsManage'));
-
 const AppRoutes = ({ onOpenQuote }) => {
   return (
     <Suspense fallback={<LoadingPage />}>
@@ -54,22 +42,6 @@ const AppRoutes = ({ onOpenQuote }) => {
         <Route path="/terms-of-use" element={<Terms />} />
         <Route path="/cookie-policy" element={<CookiePolicy />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
-
-        {/* Admin Login Route */}
-        <Route path="/admin/login" element={<Login />} />
-
-        {/* Protected Admin Dashboard Routes */}
-        <Route path="/admin" element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="enquiries" element={<Enquiries />} />
-          <Route path="enquiries/:id" element={<EnquiryDetails />} />
-          <Route path="services" element={<ServicesManage />} />
-          <Route path="settings" element={<SiteSettings />} />
-          <Route path="testimonials" element={<TestimonialsManage />} />
-          <Route path="partners" element={<PartnersManage />} />
-          <Route path="blogs" element={<BlogsManage />} />
-          <Route index element={<Navigate to="/admin/dashboard" replace />} />
-        </Route>
 
         {/* Catch-all Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
