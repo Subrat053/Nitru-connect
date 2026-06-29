@@ -86,7 +86,7 @@ const Contact = () => {
 
       <SEO 
         title="Contact Us"
-        description="Get in touch with the UCBS team. Request a free business consultation, submit utility bills, or send customer enquiries."
+        description="Get in touch with the Nitru Connect team. Request a free business consultation, submit utility bills, or send customer enquiries."
       />
 
       <section className="max-w-7xl mx-auto px-4 md:px-8 py-8 relative z-10">
@@ -95,7 +95,7 @@ const Contact = () => {
           {/* Contact Details Card list on Left */}
           <div className="lg:col-span-5 flex flex-col gap-6 text-left">
             <div className="glass-panel p-8 rounded-3xl border border-slate-200 bg-white/85 shadow-md">
-              <h2 className="font-montserrat text-xl font-bold text-neutral mb-6">Contact UCBS</h2>
+              <h2 className="font-montserrat text-xl font-bold text-neutral mb-6">Contact Nitru Connect</h2>
 
               <div className="flex flex-col gap-6">
                 {/* Phone */}
@@ -105,7 +105,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-xs text-neutral">Phone</h4>
-                    <a href="tel:+441437957009" className="text-primary text-xs mt-0.5 block hover:underline transition-colors font-bold">+44 1437 957009</a>
+                    <a href="tel:+447721809769" className="text-primary text-xs mt-0.5 block hover:underline transition-colors font-bold">+44 7721809769</a>
                   </div>
                 </div>
 
@@ -116,7 +116,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-xs text-neutral">WhatsApp</h4>
-                    <a href="https://wa.me/447352540222" target="_blank" rel="noreferrer" className="text-primary text-xs mt-0.5 block hover:underline transition-colors font-bold">+44 7352 540222</a>
+                    <a href="https://wa.me/447721809769" target="_blank" rel="noreferrer" className="text-primary text-xs mt-0.5 block hover:underline transition-colors font-bold">+44 7721809769</a>
                     <span className="text-[10px] text-gray-400 block font-semibold mt-0.5">Message us for a quick business review enquiry.</span>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-xs text-neutral">Email</h4>
-                    <a href="mailto:info@ucbsltd.co.uk" className="text-primary text-xs mt-0.5 block hover:underline transition-colors font-bold">info@ucbsltd.co.uk</a>
+                    <a href="mailto:info@nitruconnectltd.com" className="text-primary text-xs mt-0.5 block hover:underline transition-colors font-bold">info@nitruconnectltd.com</a>
                   </div>
                 </div>
 
@@ -140,8 +140,8 @@ const Contact = () => {
                   <div>
                     <h4 className="font-bold text-xs text-neutral">Registered Office</h4>
                     <span className="text-gray-500 text-xs mt-0.5 block font-semibold leading-relaxed">
-                      Utility Concepts Business Solutions Ltd<br />
-                      Haverfordwest, Pembrokeshire, Wales
+                      Nitru Connect Ltd<br />
+                      87 high street south, East Ham, E66EJ.
                     </span>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ const Contact = () => {
             <div className="glass-panel p-6 rounded-3xl border border-slate-200 bg-white/85 shadow-md text-left">
               <h3 className="font-montserrat text-sm font-bold text-neutral mb-2">Your GDPR Protection</h3>
               <p className="text-gray-500 text-[11px] leading-relaxed font-semibold">
-                UCBS handles enquiry details confidentially and only uses your information to respond to your request or support your business cost review.
+                Nitru Connect handles enquiry details confidentially and only uses your information to respond to your request or support your business cost review.
               </p>
             </div>
           </div>
@@ -177,7 +177,7 @@ const Contact = () => {
                 </div>
                 <h3 className="font-montserrat text-2xl font-bold text-neutral">Thank you!</h3>
                 <p className="text-gray-500 text-xs sm:text-sm leading-relaxed max-w-sm font-semibold">
-                  The UCBS team has received your enquiry. We will contact you soon.
+                  The Nitru Connect team has received your enquiry. We will contact you soon.
                 </p>
                 <button 
                   onClick={() => setSuccess(false)}
