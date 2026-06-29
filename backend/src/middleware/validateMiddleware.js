@@ -28,16 +28,8 @@ const validateEnquiry = (req, res, next) => {
     return res.status(400).json({ message: 'Company name is required' });
   }
 
-  if (!businessType || businessType.trim() === '') {
-    return res.status(400).json({ message: 'Business type is required' });
-  }
-
   if (!selectedService || selectedService.trim() === '') {
     return res.status(400).json({ message: 'Please select a service' });
-  }
-
-  if (consentAccepted === undefined || consentAccepted !== true) {
-    return res.status(400).json({ message: 'You must accept the data consent terms' });
   }
 
   next();

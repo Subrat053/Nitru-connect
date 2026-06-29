@@ -73,7 +73,7 @@ const Navbar = ({ onOpenQuote }) => {
             onClick={() => onOpenQuote()}
             className="bg-primary hover:bg-primary-dark text-white font-montserrat text-xs font-bold px-6 py-3 rounded-full flex items-center gap-1.5 transition-all shadow-[0_4px_15px_rgba(15,60,201,0.2)] hover:shadow-[0_6px_20px_rgba(15,60,201,0.3)] hover:-translate-y-0.5 active:scale-95"
           >
-            <span>Request Free Review</span>
+            <span>Request free consultation</span>
             <ArrowRight size={14} className="text-secondary" />
           </button>
         </div>
@@ -196,11 +196,11 @@ const Navbar = ({ onOpenQuote }) => {
               onClick={() => { setIsOpen(false); onOpenQuote(); }}
               className="w-full text-center bg-primary hover:bg-primary-dark text-white font-montserrat font-bold text-xs py-4 rounded-2xl shadow-[0_4px_12px_rgba(15,60,201,0.15)] active:scale-98 transition-all flex items-center justify-center gap-1.5"
             >
-              <span>Request Free Review</span>
+              <span>Request free consultation</span>
               <ArrowRight size={14} className="text-secondary" />
             </button>
             <a 
-              href="https://wa.me/447911123456" 
+              href="https://wa.me/447721809769" 
               target="_blank" 
               rel="noreferrer" 
               className="w-full flex items-center justify-center gap-2 bg-green-50/50 border border-green-200/60 text-green-600 font-montserrat font-bold text-xs py-3 rounded-2xl transition-all active:scale-98 hover:bg-green-50"

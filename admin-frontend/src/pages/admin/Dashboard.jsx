@@ -203,7 +203,9 @@ const Dashboard = () => {
                     <td className="py-3.5">
                       <div className="flex flex-col">
                         <span className="font-bold text-neutral">{enq.companyName}</span>
-                        <span className="text-[9px] text-gray-400 font-bold uppercase">{enq.businessType}</span>
+                        {enq.businessType && (
+                          <span className="text-[9px] text-gray-400 font-bold uppercase">{enq.businessType}</span>
+                        )}
                       </div>
                     </td>
                     <td className="py-3.5 text-gray-500">

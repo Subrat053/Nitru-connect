@@ -12,12 +12,11 @@ const QuoteForm = ({ isOpen, onClose, defaultService = '' }) => {
     selectedService: '',
     message: '',
     uploadedFile: '',
-    consentAccepted: false,
+    consentAccepted: true,
     honeypot: '', // bot field
   });
 
-  const [file, setFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
+  const [services, setServices] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -27,6 +26,20 @@ const QuoteForm = ({ isOpen, onClose, defaultService = '' }) => {
       setFormData(prev => ({ ...prev, selectedService: defaultService }));
     }
   }, [defaultService, isOpen]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await api.getServices();
+        setServices(data);
+      } catch (err) {
+        console.error('Failed to fetch services in quote form:', err);
+      }
+    };
+    if (isOpen) {
+      fetchServices();
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -38,37 +51,15 @@ const QuoteForm = ({ isOpen, onClose, defaultService = '' }) => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      if (selectedFile.size > 10 * 1024 * 1024) {
-        setErrorMsg('File size exceeds the 10MB limit.');
-        return;
-      }
-      setFile(selectedFile);
-      setErrorMsg('');
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setErrorMsg('');
 
     try {
-      // 1. If file selected, upload it first
-      let fileUrl = '';
-      if (file) {
-        setUploading(true);
-        const uploadResult = await api.uploadFile(file);
-        fileUrl = uploadResult.url;
-        setUploading(false);
-      }
-
-      // 2. Submit enquiry details
       const payload = {
         ...formData,
-        uploadedFile: fileUrl || formData.uploadedFile,
+        consentAccepted: true,
         sourcePage: window.location.pathname,
       };
 
@@ -85,16 +76,14 @@ const QuoteForm = ({ isOpen, onClose, defaultService = '' }) => {
         selectedService: '',
         message: '',
         uploadedFile: '',
-        consentAccepted: false,
+        consentAccepted: true,
         honeypot: '',
       });
-      setFile(null);
     } catch (err) {
       console.error(err);
       setErrorMsg(err.message || 'Submission failed. Please try again.');
     } finally {
       setSubmitting(false);
-      setUploading(false);
     }
   };
 
@@ -213,46 +202,36 @@ const QuoteForm = ({ isOpen, onClose, defaultService = '' }) => {
               </div>
             </div>
 
-            {/* Row 3: Business Type and Service */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex flex-col gap-1 text-left">
-                <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Business Type *</label>
-                <select 
-                  name="businessType"
-                  required
-                  value={formData.businessType}
-                  onChange={handleChange}
-                  className="border border-gray-200 rounded-xl p-3 text-xs focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white/70"
-                >
-                  <option value="">Select industry...</option>
-                  <option value="Retail">Retail Store</option>
-                  <option value="Restaurant">Restaurant / Cafe</option>
-                  <option value="Salon">Salon / Clinic</option>
-                  <option value="Office">Office / Professional Services</option>
-                  <option value="eCommerce">eCommerce Business</option>
-                  <option value="Other">Other SME</option>
-                </select>
-              </div>
-              <div className="flex flex-col gap-1 text-left">
-                <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Select Service *</label>
-                <select 
-                  name="selectedService"
-                  required
-                  value={formData.selectedService}
-                  onChange={handleChange}
-                  className="border border-gray-200 rounded-xl p-3 text-xs focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white/70"
-                >
-                  <option value="">Select service...</option>
-                  <option value="Merchant Services">Merchant / Payment Solutions</option>
-                  <option value="Business Funding">Business Funding</option>
-                  <option value="Business Energy">Business Energy</option>
-                  <option value="Broadband & Telecoms">Broadband & Telecoms</option>
-                  <option value="Waste Management">Waste Management</option>
-                  <option value="Water Bills">Water Bills</option>
-                  <option value="Digital Marketing">Digital Marketing & Web</option>
-                  <option value="eCommerce Solutions">eCommerce Growth Solutions</option>
-                </select>
-              </div>
+            {/* Service Selection */}
+            <div className="flex flex-col gap-1 text-left">
+              <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Select Service *</label>
+              <select 
+                name="selectedService"
+                required
+                value={formData.selectedService}
+                onChange={handleChange}
+                className="border border-gray-200 rounded-xl p-3 text-xs focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary bg-white/70"
+              >
+                <option value="">Select service...</option>
+                {services && services.length > 0 ? (
+                  services.map((srv) => (
+                    <option key={srv._id || srv.slug} value={srv.title}>
+                      {srv.title}
+                    </option>
+                  ))
+                ) : (
+                  <>
+                    <option value="Merchant Services">Merchant / Payment Solutions</option>
+                    <option value="Business Funding">Business Funding</option>
+                    <option value="Business Energy">Business Energy</option>
+                    <option value="Broadband & Telecoms">Broadband & Telecoms</option>
+                    <option value="Waste Management">Waste Management</option>
+                    <option value="Water Bills">Water Bills</option>
+                    <option value="Digital Marketing">Digital Marketing & Web</option>
+                    <option value="eCommerce Solutions">eCommerce Growth Solutions</option>
+                  </>
+                )}
+              </select>
             </div>
 
             {/* Message Detail */}
@@ -262,56 +241,22 @@ const QuoteForm = ({ isOpen, onClose, defaultService = '' }) => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows={2}
+                rows={4}
                 placeholder="Let us know what you need, current provider rates, or estimated volume..."
                 className="border border-gray-200 rounded-xl p-3 text-xs focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary resize-none bg-white/70"
               />
             </div>
 
-            {/* Statement File Upload */}
-            <div className="flex flex-col gap-1 text-left">
-              <label className="text-[11px] font-bold text-gray-500 uppercase tracking-wider">Upload Statement/Bill (Optional)</label>
-              <div className="border border-dashed border-gray-300 hover:border-primary rounded-2xl p-4 transition-all flex flex-col items-center justify-center text-center gap-1 cursor-pointer relative bg-white/40 hover:bg-white/60">
-                <input 
-                  type="file" 
-                  onChange={handleFileChange}
-                  className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.avif,.csv,.xlsx,.xls"
-                />
-                <Upload size={18} className="text-gray-400" />
-                <span className="text-[11px] text-gray-500 font-bold">
-                  {file ? `Selected: ${file.name}` : 'Drag & drop or click to browse'}
-                </span>
-                <span className="text-[9px] text-gray-400">PDF, JPG, XLSX up to 10MB</span>
-              </div>
-            </div>
-
-            {/* Consent accepted checkbox */}
-            <div className="flex items-start gap-2 text-left">
-              <input 
-                type="checkbox" 
-                name="consentAccepted"
-                id="consentAccepted"
-                required
-                checked={formData.consentAccepted}
-                onChange={handleChange}
-                className="mt-0.5 rounded text-primary focus:ring-primary border-gray-300 h-4 w-4"
-              />
-              <label htmlFor="consentAccepted" className="text-[10px] text-gray-400 font-semibold leading-normal">
-                I consent to Nitru Connect storing my data to process this business review and follow up with quotations. *
-              </label>
-            </div>
-
             {/* Submit CTA button */}
             <button 
               type="submit"
-              disabled={submitting || uploading}
+              disabled={submitting}
               className="mt-1 w-full bg-primary hover:bg-primary-dark text-white font-montserrat font-bold text-xs py-3.5 rounded-full flex items-center justify-center gap-2 transition-all active:scale-95 disabled:bg-gray-300 disabled:pointer-events-none shadow-[0_4px_15px_rgba(15,60,201,0.2)]"
             >
-              {submitting || uploading ? (
+              {submitting ? (
                 <>
                   <RefreshCw className="animate-spin" size={16} />
-                  {uploading ? 'Uploading statement...' : 'Submitting request...'}
+                  Submitting request...
                 </>
               ) : (
                 'Request Consultation'

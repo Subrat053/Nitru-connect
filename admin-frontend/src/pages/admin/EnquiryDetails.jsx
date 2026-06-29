@@ -200,15 +200,17 @@ const EnquiryDetails = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0 border border-primary/10">
-              <ShieldCheck className="text-primary/70" size={16} />
+          {enquiry.businessType && (
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0 border border-primary/10">
+                <ShieldCheck className="text-primary/70" size={16} />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] text-gray-400 font-bold uppercase">Business Sector</span>
+                <span className="font-bold text-neutral">{enquiry.businessType}</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="text-[9px] text-gray-400 font-bold uppercase">Business Sector</span>
-              <span className="font-bold text-neutral">{enquiry.businessType}</span>
-            </div>
-          </div>
+          )}
 
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-primary/5 rounded-xl flex items-center justify-center shrink-0 border border-primary/10">

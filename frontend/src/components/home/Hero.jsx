@@ -161,7 +161,7 @@ const Hero = ({ onOpenQuote }) => {
                 onClick={onOpenQuote}
                 className="bg-primary hover:bg-primary-dark text-white font-montserrat text-xs font-bold px-8 py-4 rounded-full flex items-center gap-2 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(15,60,201,0.25)] active:scale-95 transition-all duration-300 shadow-[0_4px_15px_rgba(15,60,201,0.2)] cursor-pointer"
               >
-                <span>Request Free Review</span>
+                <span>Request free consultation</span>
                 <ArrowRight size={14} className="text-secondary" />
               </button>
               <button 

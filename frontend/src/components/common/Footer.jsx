@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Send, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { api } from '../../services/api';
 
 const Footer = () => {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await api.getServices();
+        setServices(data);
+      } catch (err) {
+        console.error('Failed to load services in footer:', err);
+      }
+    };
+    fetchServices();
+  }, []);
   return (
     <footer className="relative bg-gradient-to-b from-[#f4f7fc] to-[#e8eef8] pt-12 pb-16 px-4 md:px-8">
       {/* Curved connection line graphic */}
@@ -58,12 +72,24 @@ const Footer = () => {
           <div className="lg:col-span-2 flex flex-col gap-4 text-left">
             <h4 className="text-xs font-bold text-primary uppercase tracking-wider">Services</h4>
             <ul className="flex flex-col gap-2.5 text-xs font-semibold text-gray-500">
-              <li><Link to="/services/card-machines" className="hover:text-primary transition-colors">Card Machines</Link></li>
-              <li><Link to="/services/pos-systems" className="hover:text-primary transition-colors">POS Systems</Link></li>
-              <li><Link to="/services/business-funding" className="hover:text-primary transition-colors">Business Funding</Link></li>
-              <li><Link to="/services/business-bank-accounts" className="hover:text-primary transition-colors">Business Bank Accounts</Link></li>
-              <li><Link to="/services/software-products" className="hover:text-primary transition-colors">Software Products</Link></li>
-              <li><Link to="/services/business-energy" className="hover:text-primary transition-colors">Electric & Gas</Link></li>
+              {services && services.length > 0 ? (
+                services.map((srv) => (
+                  <li key={srv._id || srv.slug}>
+                    <Link to={`/services/${srv.slug}`} className="hover:text-primary transition-colors">
+                      {srv.title}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <>
+                  <li><Link to="/services/card-machines" className="hover:text-primary transition-colors">Card Machines</Link></li>
+                  <li><Link to="/services/pos-systems" className="hover:text-primary transition-colors">POS Systems</Link></li>
+                  <li><Link to="/services/business-funding" className="hover:text-primary transition-colors">Business Funding</Link></li>
+                  <li><Link to="/services/business-bank-accounts" className="hover:text-primary transition-colors">Business Bank Accounts</Link></li>
+                  <li><Link to="/services/software-products" className="hover:text-primary transition-colors">Software Products</Link></li>
+                  <li><Link to="/services/business-energy" className="hover:text-primary transition-colors">Electric & Gas</Link></li>
+                </>
+              )}
             </ul>
           </div>
 
@@ -85,20 +111,20 @@ const Footer = () => {
             <div className="flex flex-col gap-3 text-xs font-semibold text-gray-500">
               <span className="flex items-start gap-2.5">
                 <MapPin size={16} className="text-secondary-dark shrink-0 mt-0.5" />
-                <span>100 Bishopsgate, London EC2M 1GT, United Kingdom</span>
+                <span>87 high street south, East Ham, E66EJ.</span>
               </span>
               <span className="flex items-center gap-2.5">
                 <Phone size={16} className="text-secondary-dark shrink-0" />
-                <a href="tel:+442079460958" className="hover:text-primary transition-colors">+44 20 7946 0958</a>
+                <a href="tel:+447721809769" className="hover:text-primary transition-colors">+44 7721809769</a>
               </span>
               <span className="flex items-center gap-2.5">
                 <Mail size={16} className="text-secondary-dark shrink-0" />
-                <a href="mailto:hello@nitruconnect.com" className="hover:text-primary transition-colors">hello@nitruconnect.com</a>
+                <a href="mailto:info@nitruconnectltd.com" className="hover:text-primary transition-colors">info@nitruconnectltd.com</a>
               </span>
               
               <div className="mt-2 flex gap-2">
                 <a 
-                  href="https://wa.me/447911123456" 
+                  href="https://wa.me/447721809769" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="flex items-center gap-1.5 bg-green-500 hover:bg-green-600 text-white font-bold text-[10px] px-4 py-2.5 rounded-full transition-colors shadow-sm"

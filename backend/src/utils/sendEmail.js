@@ -71,10 +71,12 @@ const getLeadNotificationHtml = (lead) => {
           <th style="padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #e1e3e5;">Company Name</th>
           <td style="padding: 10px; border-bottom: 1px solid #e1e3e5;">${lead.companyName}</td>
         </tr>
+        ${lead.businessType ? `
         <tr style="background-color: #f2f4fc;">
           <th style="padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #e1e3e5;">Business Type</th>
           <td style="padding: 10px; border-bottom: 1px solid #e1e3e5;">${lead.businessType}</td>
         </tr>
+        ` : ''}
         <tr>
           <th style="padding: 10px; text-align: left; font-weight: bold; border-bottom: 1px solid #e1e3e5;">Selected Service</th>
           <td style="padding: 10px; border-bottom: 1px solid #e1e3e5; color: #0f3cc9; font-weight: bold;">${lead.selectedService}</td>

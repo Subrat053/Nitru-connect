@@ -25,7 +25,7 @@ const enquirySchema = new mongoose.Schema(
     },
     businessType: {
       type: String,
-      required: [true, 'Please add a business type'],
+      default: '',
     },
     selectedService: {
       type: String,
@@ -62,7 +62,7 @@ const enquirySchema = new mongoose.Schema(
     ],
     consentAccepted: {
       type: Boolean,
-      required: [true, 'Consent must be accepted'],
+      default: true,
     },
   },
   { timestamps: true }

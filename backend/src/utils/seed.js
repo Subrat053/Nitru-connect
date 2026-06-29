@@ -86,48 +86,26 @@ const defaultServices = [
     isActive: true
   },
   {
-    title: 'Water & Sewerage',
-    slug: 'water-bills',
+    title: 'Water and waste management',
+    slug: 'water-and-waste-management',
     category: 'Utilities',
-    shortDescription: 'Commercial water auditing and retail water supplier switches.',
-    longDescription: 'Verify meter accuracy, audit wastewater charges, and secure lower commercial water tariffs. Switching business water providers reduces overheads for high-usage industries like salons and clinics.',
+    shortDescription: 'Commercial water auditing, retail switches, and waste disposal recycling contracts.',
+    longDescription: 'Optimize both your commercial water billing and waste disposal schedules. We audit sewerage charges and waste lift tariffs, helping businesses stay compliant and lower overheads for high-usage sites.',
     heroImage: '',
     benefits: [
-      'Historical water bill audits for charge correction refund claims',
-      'Access to lower wholesale market retail margins',
-      'Smart meter installation for leakage prevention alerts',
-      'Consolidated multi-site water accounts'
-    ],
-    processSteps: [
-      { title: 'Submit Bills', description: 'Provide previous water and sewerage charges statements.' },
-      { title: 'Conduct Audit', description: 'Identify overcharging, meter faults, or pipe leaks.' },
-      { title: 'Switch Supplier', description: 'Migrate to the selected water supplier to secure discounts.' }
-    ],
-    faqs: [
-      { question: 'Can businesses choose their water provider?', answer: 'Yes, in deregulated regions, commercial customers can choose their retail water provider.' }
-    ],
-    isActive: true
-  },
-  {
-    title: 'Waste Management',
-    slug: 'waste-management',
-    category: 'Utilities',
-    shortDescription: 'Reliable, cost-effective waste disposal and commercial recycling contracts.',
-    longDescription: 'Optimize commercial waste collection schedules and recycling audits. We help businesses lower disposal costs, stay compliant with local environmental laws, and select the right container setups.',
-    heroImage: '',
-    benefits: [
+      'Historical water bill audits for wastewater charge refunds',
       'Tailored collections for general, recycling, and food waste',
-      'Duty of Care compliance documentation fully managed',
-      'Flexible collection frequencies (daily, weekly, bi-weekly)',
-      'Savings up to 30% on landfill disposal taxes'
+      'Flexible bin lift frequencies (daily, weekly, bi-weekly)',
+      'Consolidated multi-site utility and waste accounts'
     ],
     processSteps: [
-      { title: 'Audit Waste Output', description: 'Evaluate current bin sizes, categories, and collection schedule.' },
-      { title: 'Settle Tariff', description: 'We quote a lower cost-per-lift contract price.' },
-      { title: 'Schedule Collections', description: 'Bins are delivered and regular service starts.' }
+      { title: 'Audit Bills & Waste', description: 'Submit previous water charges and waste lift statement copies.' },
+      { title: 'Source Quotations', description: 'We identify lower wholesale tariffs and cost-per-lift options.' },
+      { title: 'Switch Contracts', description: 'Migrate both billing structures seamlessly with zero disruption.' }
     ],
     faqs: [
-      { question: 'What is Duty of Care?', answer: 'It is a legal requirement for businesses to ensure that all waste is transferred only to authorized waste collection authorities.' }
+      { question: 'Can businesses choose their water provider?', answer: 'Yes, in deregulated regions, commercial customers can choose their retail water provider.' },
+      { question: 'What waste collection compliance is managed?', answer: 'We ensure full Duty of Care compliance documentation is set up for all waste transfers.' }
     ],
     isActive: true
   },

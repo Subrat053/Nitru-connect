@@ -130,7 +130,7 @@ const About = ({ onOpenQuote }) => {
               onClick={onOpenQuote}
               className="bg-secondary hover:bg-secondary-dark text-neutral font-montserrat text-xs font-bold px-8 py-3.5 rounded-full transition-all active:scale-95 shadow-md mt-2"
             >
-              Start Your Business Review
+              Start Your Business Consultation
             </button>
           </div>
         </div>
